@@ -129,7 +129,7 @@ interface DataItem {
 }
 
 const App = () => {
-  const [param1, setParam1] = useState('234567890');
+  const [param1, setParam1] = useState('123456789');
   const [param2, setParam2] = useState('61');
   const [param3, setParam3] = useState('REACT_NATIVE_CODE');
   const [data, setData] = useState<DataItem[] | null>(null);
