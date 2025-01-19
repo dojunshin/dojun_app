@@ -122,15 +122,14 @@ import { StyleSheet, Text, View, TextInput, ActivityIndicator, FlatList, SafeAre
 import styles from './src/style';
 
 interface DataItem {
-  PT_NO: string;
-  HSP_CLS: string;
-  ORD_DTE: string;
-  ORD_SEQ: string;
+  USER_PID: string;
+  USER_PW: string;
+  USER_JDTE: string;
+  USER_SEQ: string;
 }
 
 const App = () => {
   const [param1, setParam1] = useState('123456789');
-  const [param2, setParam2] = useState('61');
   const [param3, setParam3] = useState('REACT_NATIVE_CODE');
   const [data, setData] = useState<DataItem[] | null>(null);
   const [loading, setLoading] = useState(true);
@@ -141,7 +140,7 @@ const App = () => {
       setLoading(true);
       setError(null);
       try {
-        const apiUrl = `https://do-dul.kro.kr/api/api/data?in_ptno=${param1}&in_hspcls=${param2}&in_wkid=${param3}`;
+        const apiUrl = `https://do-dul.kro.kr/api/api/data?in_ptno=${param1}&in_wkid=${param3}`;
         const response = await fetch(apiUrl);
 
         if (!response.ok) {
@@ -150,7 +149,7 @@ const App = () => {
 
         const json = await response.json();
 
-        if (json && json.length === 1 && !json[0].PT_NO && !json[0].HSP_CLS && !json[0].ORD_DTE && !json[0].ORD_SEQ) {
+        if (json && json.length === 1 && !json[0].USER_PID && !json[0].USER_PW && !json[0].USER_JDTE && !json[0].USER_SEQ) {
            setData([]);
         } else {
             setData(json);
@@ -167,7 +166,7 @@ const App = () => {
     };
 
     fetchData();
-  }, [param1, param2, param3]);
+  }, [param1, param3]);
 
   const handleItemChange = (index: number, field: keyof DataItem, newValue: string) => {
     if (data) {
@@ -217,29 +216,29 @@ const App = () => {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => (
             <View style={styles.listItem}>
-              <Text style={styles.listText}>PT_NO:</Text>
+              <Text style={styles.listText}>USER_PID:</Text>
               <TextInput
                 style={styles.itemInput}
-                value={item.PT_NO}
-                onChangeText={(text) => handleItemChange(index, 'PT_NO', text)}
+                value={item.USER_PID}
+                onChangeText={(text) => handleItemChange(index, 'USER_PID', text)}
               />
-              <Text style={styles.listText}>HSP_CLS:</Text>
+              <Text style={styles.listText}>USER_PW:</Text>
               <TextInput
                 style={styles.itemInput}
-                value={item.HSP_CLS}
-                onChangeText={(text) => handleItemChange(index, 'HSP_CLS', text)}
+                value={item.USER_PW}
+                onChangeText={(text) => handleItemChange(index, 'USER_PW', text)}
               />
               <Text style={styles.listText}>ORD_DTE:</Text>
               <TextInput
                 style={styles.itemInput}
-                value={item.ORD_DTE}
-                onChangeText={(text) => handleItemChange(index, 'ORD_DTE', text)}
+                value={item.USER_JDTE}
+                onChangeText={(text) => handleItemChange(index, 'USER_JDTE', text)}
               />
               <Text style={styles.listText}>ORD_SEQ:</Text>
               <TextInput
                 style={styles.itemInput}
-                value={item.ORD_SEQ}
-                onChangeText={(text) => handleItemChange(index, 'ORD_SEQ', text)}
+                value={item.USER_SEQ}
+                onChangeText={(text) => handleItemChange(index, 'USER_SEQ', text)}
               />
             </View>
           )}
